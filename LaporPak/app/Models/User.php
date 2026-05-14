@@ -7,7 +7,6 @@ use Database\Factories\UserFactory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
-use App\Models\Pengaduan; // <-- Tambahkan ini
 
 class User extends Authenticatable
 {
@@ -23,7 +22,6 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role', // <-- Tambahkan 'role' di sini
     ];
 
     /**
@@ -47,11 +45,5 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
-    }
-
-    // <-- TAMBAHKAN FUNGSI RELASI INI DI BAWAH
-    public function pengaduans()
-    {
-        return $this->hasMany(Pengaduan::class);
     }
 }
