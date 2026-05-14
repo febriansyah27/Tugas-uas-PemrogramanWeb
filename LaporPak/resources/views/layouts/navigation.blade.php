@@ -10,11 +10,21 @@
                     </a>
                 </div>
 
-                <!-- Navigation Links -->
+                <!-- Navigation Links (Tampilan Desktop) -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    <!-- MENU KHUSUS WARGA -->
+                    @if(auth()->user()->role == 'warga')
+                        <x-nav-link :href="route('pengaduan.create')" :active="request()->routeIs('pengaduan.create')">
+                            Buat Laporan
+                        </x-nav-link>
+                        <x-nav-link :href="route('pengaduan.index')" :active="request()->routeIs('pengaduan.index')">
+                            Riwayat Laporan
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -64,12 +74,22 @@
         </div>
     </div>
 
-    <!-- Responsive Navigation Menu -->
+    <!-- Responsive Navigation Menu (Tampilan HP/Tablet) -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            <!-- MENU KHUSUS WARGA (VERSHP HP) -->
+            @if(auth()->user()->role == 'warga')
+                <x-responsive-nav-link :href="route('pengaduan.create')" :active="request()->routeIs('pengaduan.create')">
+                    Buat Laporan
+                </x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('pengaduan.index')" :active="request()->routeIs('pengaduan.index')">
+                    Riwayat Laporan
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
